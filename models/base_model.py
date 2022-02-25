@@ -7,10 +7,18 @@ from datetime import datetime
 
 class BaseModel(ABC):
     """ BaseModel class """
-    def __init__(self):
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        if len(kwargs) != 0:
+            for key in kwargs.keys():
+                if key == "__class__":
+                    continue
+                setattr(self, key, kwargs[key])
+            self.created_at = datetime.strptime(self.created_at, '%Y-%m-%dT%H:%M:%S.%f')
+            self.updated_at = datetime.strptime(self.updated_at, '%Y-%m-%dT%H:%M:%S.%f')
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
@@ -31,12 +39,12 @@ class BaseModel(ABC):
         return dct
 
 
-b1 = BaseModel()
-print("__str__:")
-print(b1)
-print("---------")
-print("__dict__:")
-print(b1.__dict__)
-print("---------")
-print("to_dict():")
-print(b1.to_dict())
+#b1 = BaseModel()
+#print("__str__:")
+#print(b1)
+#print("---------")
+#print("__dict__:")
+#print(b1.__dict__)
+#print("---------")
+#print("to_dict():")
+#print(b1.to_dict())
