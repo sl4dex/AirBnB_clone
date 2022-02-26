@@ -3,6 +3,7 @@
 from abc import ABC, abstractmethod
 from uuid import uuid4
 from datetime import datetime
+from models import storage
 
 
 class BaseModel(ABC):
@@ -19,6 +20,7 @@ class BaseModel(ABC):
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
@@ -26,6 +28,7 @@ class BaseModel(ABC):
     def save(self):
         """ updates updated_at attribute to current datetime """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """
@@ -37,7 +40,6 @@ class BaseModel(ABC):
         dct['created_at'] = self.created_at.isoformat()
         dct['updated_at'] = self.updated_at.isoformat()
         return dct
-
 
 #b1 = BaseModel()
 #print("__str__:")
