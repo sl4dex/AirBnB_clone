@@ -38,16 +38,10 @@ class HBNBCommand(cmd.Cmd):
         if len(line) < 2:
             print("** instance id missing **")
             return
-        try:
-            with open("./file.json", "r") as fd:
-                database = json.loads(fd.read())
 
-                if f'{line[0]}.{line[1]}' in database.keys():
-                    print(database[f'{line[0]}.{line[1]}'])
-                    return
-        except Exception:
-            pass
-        finally:
+        if f'{line[0]}.{line[1]}' in storage.all().keys():
+                    print(storage.all()[f'{line[0]}.{line[1]}'])
+        else:
             print("** no instance found **")
 
 
