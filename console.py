@@ -2,6 +2,7 @@
 """contains the entry point of the command interpreter"""
 import cmd
 import json
+from queue import Empty
 from models.base_model import BaseModel
 from models import storage
 
@@ -44,6 +45,25 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** no instance found **")
 
+    def do_destroy(self, line):
+        pass
+
+    def do_all(self, line):
+        database = storage.all().values()
+        if len(line) != 0:
+            aux = []
+            line = line
+            instances_list = storage.all().values()
+            for obj in instances_list:
+                if type(obj).__name__ == line:
+                    aux.append(obj.__str__())
+            if len(aux) == 0:
+                print("** class doesn't exist **")
+            else:
+                print(aux)
+                return
+        else:
+            print(list(map(lambda x:x.__str__(), database)))
 
     def do_EOF(self, line):
         "Exit the program"

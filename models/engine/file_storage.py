@@ -18,22 +18,11 @@ class FileStorage():
         try:
             with open(f'{self.__file_path}','r') as fd:
                 database = json.load(fd)
-
                 for key in database.keys():
-#                    database[key].pop('__class__')
-#                    database[key]['created_at'] = datetime.strptime(database[key]['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
-#                    database[key]['pdated_at'] = datetime.strptime(database[key]['pdated_at'], '%Y-%m-%dT%H:%M:%S.%f')
-                    self.__objects.update({key : BaseModel(database[key])})
-
-
+                    self.__objects.update({key : BaseModel(**database[key])})
         except Exception as fail:
-            print(fail)
             return
 
     def save(self):
         with open(f'{self.__file_path}', mode='w+') as fd:
- #           fd.write(json.dumps(self.__objects))
-            to_save = self.__objects.copy()
-            for key, value in to_save.items():
-                to_save[key] = value.to_dict()
-            fd.write(json.dumps(to_save))
+            fd.write(json.dumps(dict(map(lambda x: (x[0], x[1].to_dict()), self.__objects.items()))))
