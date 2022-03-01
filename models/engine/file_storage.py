@@ -3,6 +3,7 @@
 import json
 from datetime import datetime
 from models.base_model import BaseModel
+from models.user import User
 
 class FileStorage():
     __file_path = "file.json"
@@ -15,15 +16,17 @@ class FileStorage():
             self.__objects.update({f'{type(obj).__name__}.{obj.id}': obj})
 
     def reload(self):
-        with open(self.__file_path,'r') as fd:
-            database = json.load(fd)
-            for key in database.keys():
-                key_aux = key.split(".")
-                aux = eval(f'{key_aux[0]}({database[key]})')
-                self.__objects.update({key : aux})
- #       except Exception as fail:
-#            print(fail)
-        return
+        try:
+            with open(self.__file_path,'r') as fd:
+                database = json.load(fd)
+                # for each "object" in the file
+                for key in database.keys():
+                    key_aux = key.split(".")
+				    # aux holds the created instance Class(**valuesdict)
+                    aux = eval(f'{key_aux[0]}(**{database[key]})')
+                    self.__objects.update({key : aux})
+        except Exception as fail:
+            return
 
     def save(self):
         with open(f'{self.__file_path}', mode='w+') as fd:

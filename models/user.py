@@ -2,7 +2,7 @@ from models.base_model import BaseModel
 class User(BaseModel):
     """class user"""
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.email = ""
         self.password = ""
         self.first_name = ""
