@@ -1,6 +1,6 @@
 from models.base_model import BaseModel
-class Amenityr(BaseModel):
-    """class user"""
+class Amenity(BaseModel):
+    """class amenity"""
 
     name = ""
     def __init__(self, *args, **kwargs):
