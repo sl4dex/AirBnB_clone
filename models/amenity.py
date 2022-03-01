@@ -1,11 +1,7 @@
 from models.base_model import BaseModel
-class User(BaseModel):
+class Amenityr(BaseModel):
     """class user"""
 
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
-
+    name = ""
     def __init__(self):
         super().__init__()
