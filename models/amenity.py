@@ -3,5 +3,5 @@ class Amenityr(BaseModel):
     """class user"""
 
     name = ""
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         super().__init__()

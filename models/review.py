@@ -5,5 +5,5 @@ class Review(BaseModel):
     place_id = ""
     user_id = ""
     txt = ""
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         super().__init__()
