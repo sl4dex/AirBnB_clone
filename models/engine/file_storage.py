@@ -28,12 +28,14 @@ class FileStorage():
         try:
             with open(self.__file_path,'r') as fd:
                 database = json.load(fd)
-                aux = eval(f'{key_aux[0]}(**{database[key]})')
-                self.__objects.update({key : aux})
+                for key in database.keys():
+                    classname = key.split(".")[0]
+                    aux = eval(f'{classname}(**{database[key]})')
+                    self.__objects.update({key : aux})
         except Exception as fail:
             return
 
     def save(self):
         """Saves __objects to file as JSON"""
         with open(f'{self.__file_path}', mode='w+') as fd:
-            fd.write(json.dumps(dict(map(lambda x: (x[0], x[1].to_dict()), self.__objects.items()))))
+            fd.write(json.dumps(dict(map(lambda x: (x[0], x[1].to_dict()), self.__objects.items())), sort_keys=True, indent=4))

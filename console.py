@@ -115,8 +115,9 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
         database = models.storage.all()
+        datatype =type(database[f'{line[0]}.{line[1]}'])
         # setattr ( database[classname.id], attrname, attrvalue )
-        setattr(database[f'{line[0]}.{line[1]}'], line[2], line[3])
+        setattr(database[f'{line[0]}.{line[1]}'], line[2], eval(f'{datatype}(line[3])'))
         models.storage.save()
 
     def do_EOF(self, line):
