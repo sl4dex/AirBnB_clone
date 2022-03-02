@@ -3,8 +3,6 @@ class City(BaseModel):
     """class City"""
 
     def __init__(self, *args, **kwargs):
-        self.email = ""
-        self.password = ""
-        self.first_name = ""
-        self.last_name = ""
+        self.state_id = ""
+        self.name = ""
         super().__init__()

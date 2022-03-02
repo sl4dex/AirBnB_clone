@@ -99,11 +99,9 @@ class HBNBCommand(cmd.Cmd):
         line = line.split()
         if self.cls_validate(line) == 1:
             return
-
         if len(line) < 2:
             print("** instance id missing **")
             return
-
         # if <class>.<id> is not in __objects{} keys
         if f'{line[0]}.{line[1]}' not in models.storage.all().keys():
             print("** no instance found **")
@@ -115,9 +113,10 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
         database = models.storage.all()
-        datatype =type(database[f'{line[0]}.{line[1]}'])
-        # setattr ( database[classname.id], attrname, attrvalue )
-        setattr(database[f'{line[0]}.{line[1]}'], line[2], eval(f'{datatype}(line[3])'))
+        obj = database[f'{line[0]}.{line[1]}']
+        datatype = type(getattr(obj, line[2])).__name__
+        # setattr( object, attrname, type(attrvalue) )
+        setattr(obj, line[2], eval(f'{datatype}("{line[3]}")'))
         models.storage.save()
 
     def do_EOF(self, line):
@@ -134,5 +133,4 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    print(BaseModel.__subclasses__())
     HBNBCommand().cmdloop()
