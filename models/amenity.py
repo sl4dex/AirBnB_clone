@@ -3,5 +3,5 @@ class Amenity(BaseModel):
     """class amenity"""
 
     def __init__(self, *args, **kwargs):
-        name = ""
+        self.name = ""
         super().__init__()
