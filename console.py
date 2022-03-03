@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """contains the entry point of the command interpreter"""
+import re
 import cmd
 import json
 from queue import Empty
@@ -27,6 +28,33 @@ class HBNBCommand(cmd.Cmd):
                 return 0
         print("** class doesn't exist **")
         return 1
+
+    def precmd(self, line):
+        pattern = r'([a-zA-Z]+)\.([a-z]+)\((.*)\)'
+        pattern_dict = r'([^,]*), ?(.*)'
+        result = re.match(pattern, line)
+
+        if result:
+            clase = result.group(1,2,3)[0]
+            command = result.group(1,2,3)[1]
+            parentesis = result.group(1,2,3)[2]
+            if "{" not in parentesis:
+                parentesis = parentesis.replace(",", " ")
+            else:
+
+                ide = re.match(pattern_dict, parentesis).group(1) + " "
+                dictionary = re.match(pattern_dict, parentesis).group(2)
+                parentesis = ide + " " + dictionary
+            aux = ""
+            aux += command + " "
+            aux += clase + " "
+            aux += parentesis
+            print(aux)
+            return ""
+            return aux
+        else:
+            return line
+
 
     def do_create(self, line):
         """creates a new instance of the parameter and saves it """
@@ -77,7 +105,6 @@ class HBNBCommand(cmd.Cmd):
         Prints string representation of all instances
         of the specified class
         """
-
         database = models.storage.all().values()
         if len(line) != 0:
             aux = []
@@ -85,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
             for obj in instances_list:
                 if type(obj).__name__ == line:
                     aux.append(obj.__str__())
-            if len(aux) == 0:
+            if len(aux) == 0 and len(instances_list) != 0:
                 print("** class doesn't exist **")
             else:
                 print(aux)
