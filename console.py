@@ -41,7 +41,6 @@ class HBNBCommand(cmd.Cmd):
             if "{" not in parentesis:
                 parentesis = parentesis.replace(",", " ")
             else:
-
                 ide = re.match(pattern_dict, parentesis).group(1) + " "
                 dictionary = re.match(pattern_dict, parentesis).group(2)
                 parentesis = ide + " " + dictionary
@@ -49,8 +48,6 @@ class HBNBCommand(cmd.Cmd):
             aux += command + " "
             aux += clase + " "
             aux += parentesis
-            print(aux)
-            return ""
             return aux
         else:
             return line
@@ -70,7 +67,6 @@ class HBNBCommand(cmd.Cmd):
         Prints the string representation of an instance based on
         the class name and id
         """
-
         line = line.split()
         if self.cls_validate(line) == 1:
             return
@@ -122,13 +118,13 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """ Updates a single value of the specified instance """
-
         line = line.split()
         if self.cls_validate(line) == 1:
             return
         if len(line) < 2:
             print("** instance id missing **")
             return
+        
         # if <class>.<id> is not in __objects{} keys
         if f'{line[0]}.{line[1]}' not in models.storage.all().keys():
             print("** no instance found **")
