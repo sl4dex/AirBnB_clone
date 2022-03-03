@@ -14,4 +14,4 @@ class Place(BaseModel):
         self.latitude = 0.0
         self.longitude = 0.0
         self.amenity_ids = []
-        super().__init__()
+        super().__init__(*args, **kwargs)

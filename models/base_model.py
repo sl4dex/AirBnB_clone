@@ -40,13 +40,3 @@ class BaseModel(ABC):
         dct['created_at'] = self.created_at.isoformat()
         dct['updated_at'] = self.updated_at.isoformat()
         return dct
-
-#b1 = BaseModel()
-#print("__str__:")
-#print(b1)
-#print("---------")
-#print("__dict__:")
-#print(b1.__dict__)
-#print("---------")
-#print("to_dict():")
-#print(b1.to_dict())
