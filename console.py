@@ -16,6 +16,12 @@ from models.review import Review
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
+    def precmd(self, line):
+        """
+        Method executed before line is interpreted by cmd, but after
+		the prompt is generated
+        """
+        
     @staticmethod
     def cls_validate(line):
         """validates class existance and name"""
