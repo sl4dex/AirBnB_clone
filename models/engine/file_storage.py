@@ -26,16 +26,17 @@ class FileStorage():
     def reload(self):
         """Loads JSON from file to the __objects dict (if file exists)"""
         try:
-            with open(self.__file_path,'r') as fd:
+            with open(self.__file_path, 'r') as fd:
                 database = json.load(fd)
                 for key in database.keys():
                     classname = key.split(".")[0]
                     aux = eval(f'{classname}(**{database[key]})')
-                    self.__objects.update({key : aux})
+                    self.__objects.update({key: aux})
         except Exception as fail:
             return
 
     def save(self):
         """Saves __objects to file as JSON"""
-        with open(f'{self.__file_path}', mode='w+') as fd:
-            fd.write(json.dumps(dict(map(lambda x: (x[0], x[1].to_dict()), self.__objects.items())), sort_keys=True, indent=4))
+        with open(f'{self.__file_path}', mode='w+') as f:
+            y = self.__objects.items()
+            f.write(json.dumps(dict(map(lambda x: (x[0], x[1].to_dict()), y))))

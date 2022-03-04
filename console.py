@@ -16,7 +16,7 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
-        
+
     @staticmethod
     def cls_validate(line):
         """validates class existance and name"""
@@ -31,22 +31,24 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, line):
         """
-        Method executed before line is interpreted by cmd, but after
-		the prompt is generated
+        Method executed before line is interpreted by cmd
+        but after the prompt is generated
         """
         pattern = r'([a-zA-Z]+)\.([a-z]+)\((.*)\)'
         pattern_dict = r'([^,]*), ?(.*)'
         result = re.match(pattern, line)
 
         if result:
-            clase = result.group(1,2,3)[0].strip("\"") + " "
-            command = result.group(1,2,3)[1].strip("\"") + " "
-            parentesis = result.group(1,2,3)[2].strip("\"") + " "
+            clase = result.group(1, 2, 3)[0].strip("\"") + " "
+            command = result.group(1, 2, 3)[1].strip("\"") + " "
+            parentesis = result.group(1, 2, 3)[2].strip("\"") + " "
             if "{" not in parentesis:
                 parentesis = parentesis.replace(",", " ")
             else:
-                ide = re.match(pattern_dict, parentesis).group(1).strip("\"") + " "
-                dictionary = re.match(pattern_dict, parentesis).group(2).replace("\'", "\"")
+                ide = re.match(pattern_dict, parentesis).group(1)
+                ide = ide.strip("\"") + " "
+                dictionary = re.match(pattern_dict, parentesis).group(2)
+                dictionary = dictionary.replace("\'", "\"")
                 parentesis = ide + " " + dictionary
             aux = ""
             aux += command + " "
@@ -55,7 +57,6 @@ class HBNBCommand(cmd.Cmd):
             return aux
         else:
             return line
-
 
     def do_create(self, line):
         """creates a new instance of the parameter and saves it """
@@ -170,6 +171,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """do nothing"""
         return
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
