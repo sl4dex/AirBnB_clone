@@ -138,9 +138,17 @@ class HBNBCommand(cmd.Cmd):
     @staticmethod
     def updte(clsname, ide, attrname, attrvalue):
         """update operation for do_update()"""
+        clsname = clsname.strip("\"")
+        ide =ide.strip("\"")
+        attrname = attrname.strip("\"")
+        attrvalue = attrvalue.strip("\"")
         database = models.storage.all()
         obj = database[f'{clsname}.{ide}']
         datatype = type(getattr(obj, attrname)).__name__
+        if attrname == "amenity_ids":
+            obj.attrname.append(attrvalue)
+            models.storage.save()
+            return
         setattr(obj, attrname, eval(f'{datatype}("{attrvalue}")'))
         models.storage.save()
 
