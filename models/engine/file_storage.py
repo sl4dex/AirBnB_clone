@@ -30,7 +30,7 @@ class FileStorage():
                 database = json.load(fd)
                 for key in database.keys():
                     classname = key.split(".")[0]
-                    aux = eval(f'{classname}(**{database[key]})')
+                    aux = eval('{}({})'.format(classname, **(database[key])))
                     self.__objects.update({key: aux})
         except Exception as fail:
             return
