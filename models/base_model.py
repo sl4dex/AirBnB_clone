@@ -8,6 +8,7 @@ from uuid import uuid4
 class BaseModel():
     """ BaseModel class """
     def __init__(self, *args, **kwargs):
+        """can create a instance from kwargs"""
         if len(kwargs) != 0:
             for key in kwargs.keys():
                 if key == "__class__":
@@ -24,6 +25,7 @@ class BaseModel():
             models.storage.new(self)
 
     def __str__(self):
+        """prints string representation of object"""
         return '[{}] ({}) {}'.format(self.__class__.__name__,
                                      self.id, self.__dict__)
 
