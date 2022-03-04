@@ -14,8 +14,10 @@ class BaseModel(ABC):
                 if key == "__class__":
                     continue
                 setattr(self, key, kwargs[key])
-            self.created_at = datetime.strptime(self.created_at, '%Y-%m-%dT%H:%M:%S.%f')
-            self.updated_at = datetime.strptime(self.updated_at, '%Y-%m-%dT%H:%M:%S.%f')
+            self.created_at = datetime.strptime(self.created_at,
+                                                '%Y-%m-%dT%H:%M:%S.%f')
+            self.updated_at = datetime.strptime(self.updated_at,
+                                                '%Y-%m-%dT%H:%M:%S.%f')
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()

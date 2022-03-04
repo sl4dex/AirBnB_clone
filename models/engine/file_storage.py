@@ -26,7 +26,7 @@ class FileStorage():
     def reload(self):
         """Loads JSON from file to the __objects dict (if file exists)"""
         try:
-            with open(self.__file_path,'r') as fd:
+            with open(self.__file_path, 'r') as fd:
                 database = json.load(fd)
                 for key in database.keys():
                     classname = key.split(".")[0]
