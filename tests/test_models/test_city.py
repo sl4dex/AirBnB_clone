@@ -17,6 +17,8 @@ class TestCity(unittest.TestCase):
         self.assertEqual(type(model1.id), str)
         self.assertEqual(type(model1.created_at), datetime)
         self.assertEqual(type(model1.updated_at), datetime)
+        self.assertEqual(type(model1.state_id), str)
+        self.assertEqual(type(model1.name), str)
 
 
 if __name__ == '__main__':

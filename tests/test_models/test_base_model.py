@@ -4,6 +4,7 @@ Unittest for BaseModel class
 """
 import unittest
 from models.base_model import BaseModel
+from models import storage
 from datetime import datetime
 
 
@@ -13,7 +14,7 @@ class TestBaseModel(unittest.TestCase):
         """test __str__ method"""
         model1 = BaseModel()
         self.assertEqual(str(model1),
-                         f'[BaseModel] ({model1.id}) {model1.__dict__}')
+                         f'[BaseModel] ({model1.id}) <{model1.__dict__}>')
         self.assertEqual(type(str(model1)), str)
 
     def test_to_dict(self):
@@ -32,6 +33,10 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(model1.created_at), datetime)
         self.assertEqual(type(model1.updated_at), datetime)
 
+    def test_fstorage(self):
+        """test file storage methods"""
+        model1 = BaseModel()
+        self.assertEqual(type(storage.all()), dict)
 
 if __name__ == '__main__':
     unittest.main()

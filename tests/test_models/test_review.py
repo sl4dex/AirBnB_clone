@@ -17,6 +17,9 @@ class TestReview(unittest.TestCase):
         self.assertEqual(type(model1.id), str)
         self.assertEqual(type(model1.created_at), datetime)
         self.assertEqual(type(model1.updated_at), datetime)
+        self.assertEqual(type(model1.place_id), str)
+        self.assertEqual(type(model1.user_id), str)
+        self.assertEqual(type(model1.text), str)
 
 
 if __name__ == '__main__':
