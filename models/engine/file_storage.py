@@ -21,7 +21,9 @@ class FileStorage():
 
     def new(self, obj):
         """Adds specified object to the __objects dictionary"""
-        self.__objects.update({f'{type(obj).__name__}.{obj.id}': obj})
+        # __object.update(Class.id : object)
+        self.__objects.update('{}.{}'.format(type(obj).__name__,
+                                             {obj.id}): obj)
 
     def reload(self):
         """Loads JSON from file to the __objects dict (if file exists)"""
@@ -30,7 +32,7 @@ class FileStorage():
                 database = json.load(fd)
                 for key in database.keys():
                     classname = key.split(".")[0]
-                    aux = eval('{}({})'.format(classname, **(database[key])))
+                    aux = eval('{}(**{})'.format(classname, database[key]))
                     self.__objects.update({key: aux})
         except Exception as fail:
             return
