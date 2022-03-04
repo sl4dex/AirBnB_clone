@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ BaseModel module """
 from abc import ABC, abstractmethod
-from uuid import uuid4
 from datetime import datetime
 import models
+from uuid import uuid4
 
 
 class BaseModel(ABC):
