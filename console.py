@@ -15,6 +15,7 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
+    """Command line interpreter"""
     prompt = '(hbnb) '
 
     @staticmethod
