@@ -35,6 +35,7 @@ class HBNBCommand(cmd.Cmd):
         Method executed before line is interpreted by cmd
         but after the prompt is generated
         """
+        # clsname.id(something)
         pattern = r'([a-zA-Z]+)\.([a-z]+)\((.*)\)'
         pattern_dict = r'([^,]*), ?(.*)'
         result = re.match(pattern, line)
@@ -58,6 +59,18 @@ class HBNBCommand(cmd.Cmd):
             return aux
         else:
             return line
+
+    def do_count(self, line):
+        """Returns the number of instances"""
+        line = line.split()
+        if self.cls_validate(line) == 1:
+            return
+        instances = 0
+        for cls_id in models.storage.all().keys():
+            cls = cls_id.split(".")
+            if cls[0] == line[0]:
+                instances += 1
+        print(instances)
 
     def do_create(self, line):
         """creates a new instance of the parameter and saves it """
