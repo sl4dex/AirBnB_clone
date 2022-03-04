@@ -122,15 +122,24 @@ class HBNBCommand(cmd.Cmd):
         else:
             print(list(map(lambda x: x.__str__(), database)))
 
+    @staticmethod
+    def updte(clsname, ide, attrname, attrvalue):
+        """update operation for do_update()"""
+        database = models.storage.all()
+        obj = database[f'{clsname}.{ide}']
+        datatype = type(getattr(obj, attrname)).__name__
+        setattr(obj, attrname, eval(f'{datatype}("{attrvalue}")'))
+        models.storage.save()
+
     def do_update(self, line):
         """ Updates a single value of the specified instance """
+        dct_split = line.split(" ", 2)
         line = line.split()
         if self.cls_validate(line) == 1:
             return
         if len(line) < 2:
             print("** instance id missing **")
             return
-        
         # if <class>.<id> is not in __objects{} keys
         if f'{line[0]}.{line[1]}' not in models.storage.all().keys():
             print("** no instance found **")
@@ -138,15 +147,18 @@ class HBNBCommand(cmd.Cmd):
         if len(line) < 3:
             print("** attribute name missing **")
             return
-        if len(line) < 4:
-            print("** value missing **")
-            return
-        database = models.storage.all()
-        obj = database[f'{line[0]}.{line[1]}']
-        datatype = type(getattr(obj, line[2])).__name__
-        # setattr( object, attrname, type(attrvalue) )
-        setattr(obj, line[2], eval(f'{datatype}("{line[3]}")'))
-        models.storage.save()
+        # if third argument is a dictionary
+        if "{" in line[2]:
+            dct = json.loads(dct_split[2])
+            print(dct)
+            for k, v in dct.items():
+                # updte (classname, id, attrname, attrvalue)
+                self.updte(line[0], line[1], k, v)
+        else:
+            if len(line) < 4:
+                print("** value missing **")
+                return
+            self.updte(line[0], line[1], line[2], line[3])
 
     def do_EOF(self, line):
         "Exit the program"

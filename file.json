@@ -1,0 +1,32 @@
+{
+    "BaseModel.7549b03f-a6d6-4393-9769-06a5d96b4e7f": {
+        "__class__": "BaseModel",
+        "created_at": "2022-03-02T12:46:46.447353",
+        "id": "7549b03f-a6d6-4393-9769-06a5d96b4e7f",
+        "updated_at": "2022-03-02T12:46:46.447374"
+    },
+    "Place.2b0903d7-f42d-4ff5-bfb8-ef8a5d3d404b": {
+        "__class__": "Place",
+        "amenity_ids": [],
+        "city_id": "",
+        "created_at": "2022-03-02T12:46:51.565193",
+        "description": "",
+        "id": "2b0903d7-f42d-4ff5-bfb8-ef8a5d3d404b",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "max_guest": 0,
+        "name": "Trump",
+        "number_bathrooms": 0,
+        "number_rooms": 0,
+        "price_by_night": 0,
+        "updated_at": "2022-03-02T12:46:51.565209",
+        "user_id": ""
+    },
+    "State.eb22f2ab-b4dd-4290-9029-3ad2aa1ffbb7": {
+        "__class__": "State",
+        "created_at": "2022-03-02T12:46:57.729857",
+        "id": "eb22f2ab-b4dd-4290-9029-3ad2aa1ffbb7",
+        "name": "",
+        "updated_at": "2022-03-02T12:46:57.729875"
+    }
+}
