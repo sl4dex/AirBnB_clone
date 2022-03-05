@@ -36,6 +36,7 @@ class FileStorage(unittest.TestCase):
             fd.write(json.dumps(aux))
         self.storage.reload()
         self.assertTrue(f'BaseModel.{new.id}' in self.storage.all().keys())
+        self.assertEqual(self.storage.all()[f'BaseModel.{new.id}'].__str__(), new.__str__())
 
 
 if __name__ == '__main__':
