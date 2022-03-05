@@ -24,7 +24,7 @@ class FileStorage():
         """Adds specified object to the __objects dictionary"""
         # __object.update(Class.id : object)
         self.__objects.update({'{}.{}'.format(type(obj).__name__,
-                                             obj.id): obj})
+                                              obj.id): obj})
 
     def reload(self):
         """Loads JSON from file to the __objects dict (if file exists)"""

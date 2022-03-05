@@ -139,7 +139,7 @@ class HBNBCommand(cmd.Cmd):
     def updte(clsname, ide, attrname, attrvalue):
         """update operation for do_update()"""
         clsname = clsname.strip("\"")
-        ide =ide.strip("\"")
+        ide = ide.strip("\"")
         attrname = attrname.strip("\"")
         attrvalue = attrvalue.strip("\"")
         database = models.storage.all()

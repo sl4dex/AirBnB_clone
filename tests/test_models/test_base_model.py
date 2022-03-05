@@ -38,5 +38,6 @@ class TestBaseModel(unittest.TestCase):
         model1 = BaseModel()
         self.assertEqual(type(storage.all()), dict)
 
+
 if __name__ == '__main__':
     unittest.main()
