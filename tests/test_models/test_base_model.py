@@ -45,7 +45,7 @@ class TestBaseModel(unittest.TestCase):
         model2 = BaseModel(**model1.to_dict())
         self.assertEqual(model1.__dict__, model2.__dict__)
         self.assertFalse(model1 is model2)
-    def test_SaveAndReload(self):
+    def test_Save(self):
         model1 = BaseModel()
         model1.name = "Betty"
         model1.save()
