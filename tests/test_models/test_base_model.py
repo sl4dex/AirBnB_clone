@@ -14,7 +14,7 @@ class TestBaseModel(unittest.TestCase):
         """test __str__ method"""
         model1 = BaseModel()
         self.assertEqual(str(model1),
-                         f'[BaseModel] ({model1.id}) <{model1.__dict__}>')
+                         f'[BaseModel] ({model1.id}) {model1.__dict__}')
         self.assertEqual(type(str(model1)), str)
 
     def test_to_dict(self):
@@ -38,6 +38,12 @@ class TestBaseModel(unittest.TestCase):
         model1 = BaseModel()
         self.assertEqual(type(storage.all()), dict)
 
+    def test_kwargs(self):
+        """test creating a BaseModel instance form a str dict"""
+        model1 = BaseModel()
+        model2 = BaseModel(**model1.to_dict())
+        self.assertEqual(model1.__dict__, model2.__dict__)
+        self.assertFalse(model1 is model2)
 
 if __name__ == '__main__':
     unittest.main()
