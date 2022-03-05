@@ -38,6 +38,17 @@ class FileStorage(unittest.TestCase):
         self.assertTrue(f'BaseModel.{new.id}' in self.storage.all().keys())
         self.assertEqual(self.storage.all()[f'BaseModel.{new.id}'].__str__(), new.__str__())
 
+    def test_reload(self):
+        new_fake = BaseModel()
+        new = BaseModel(**new_fake.to_dict())
+        aux ={}
+        aux.update({f'BaseModel.{new.id}': new.to_dict()})
+        with open("file.json", "w") as fd:
+            fd.write(json.dumps(aux))
+        self.storage.reload()
+        self.assertTrue(f'BaseModel.{new.id}' in self.storage.all().keys())
+        self.assertEqual(self.storage.all()[f'BaseModel.{new.id}'].__str__(), new.__str__())
+
 
 if __name__ == '__main__':
     unittest.main()
