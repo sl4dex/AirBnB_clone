@@ -144,11 +144,10 @@ class HBNBCommand(cmd.Cmd):
         attrvalue = attrvalue.strip("\"")
         database = models.storage.all()
         obj = database[f'{clsname}.{ide}']
-        datatype = type(getattr(obj, attrname)).__name__
-        if attrname == "amenity_ids":
-            obj.attrname.append(attrvalue)
-            models.storage.save()
-            return
+        try:
+            datatype = type(getattr(obj, attrname)).__name__
+        except Exception as fail:
+            datatype = "str"
         setattr(obj, attrname, eval(f'{datatype}("{attrvalue}")'))
         models.storage.save()
 
