@@ -153,7 +153,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """ Updates a single value of the specified instance """
-        dct_split = line.split(" ", 2)
+        line_copy = line
         line = line.split()
         if self.cls_validate(line) == 1:
             return
@@ -168,13 +168,12 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
             return
         # if third argument is a dictionary
-        if "{" in line[2]:
-            dct_split[2] = dct_split[2].replace("\'", "\"")
-            dct = json.loads(dct_split[2])
-            print(dct)
-            for k, v in dct.items():
+        isdict = re.match(r'(\S+) +(.+) +({.+})', line_copy)
+
+        if isdict is not None:
+            for k, v in json.loads(isdict.groups()[2]).items():
                 # updte (classname, id, attrname, attrvalue)
-                self.updte(line[0], line[1], k, v)
+                self.updte(line[0], line[1], str(k), str(v))
         else:
             if len(line) < 4:
                 print("** value missing **")
