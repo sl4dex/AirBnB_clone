@@ -3,6 +3,7 @@
 Unittest for BaseModel class
 """
 import unittest
+import json
 from models.base_model import BaseModel
 from models import storage
 from datetime import datetime
@@ -44,6 +45,13 @@ class TestBaseModel(unittest.TestCase):
         model2 = BaseModel(**model1.to_dict())
         self.assertEqual(model1.__dict__, model2.__dict__)
         self.assertFalse(model1 is model2)
+    def test_SaveAndReload(self):
+        model1 = BaseModel()
+        model1.name = "Betty"
+        model1.save()
+        with open("file.json", "r") as fd:
+            obj = json.load(fd)[f"BaseModel.{model1.id}"]
+            self.assertEqual(model1.to_dict(), BaseModel(**obj).to_dict())
 
 if __name__ == '__main__':
     unittest.main()
