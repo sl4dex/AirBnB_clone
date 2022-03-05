@@ -122,16 +122,14 @@ class HBNBCommand(cmd.Cmd):
         """
         database = models.storage.all().values()
         if len(line) != 0:
+            if self.cls_validate([line]) == 1:
+                return
             aux = []
             instances_list = models.storage.all().values()
             for obj in instances_list:
                 if type(obj).__name__ == line:
                     aux.append(obj.__str__())
-            if len(aux) == 0 and len(instances_list) != 0:
-                print("** class doesn't exist **")
-            else:
-                print(aux)
-                return
+            print(aux)
         else:
             print(list(map(lambda x: x.__str__(), database)))
 
