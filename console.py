@@ -129,6 +129,8 @@ class HBNBCommand(cmd.Cmd):
             for obj in instances_list:
                 if type(obj).__name__ == line:
                     aux.append(obj.__str__())
+            if len(aux) == 0:
+                aux.append("")
             print(aux)
         else:
             print(list(map(lambda x: x.__str__(), database)))
