@@ -22,5 +22,6 @@ class TestUser(unittest.TestCase):
         self.assertEquial(type(model1.first_name), str)
         self.assertEquial(type(model1.last_name), str)
 
+
 if __name__ == '__main__':
     unittest.main()
