@@ -9,6 +9,7 @@ from datetime import datetime
 from models.engine.file_storage import FileStorage
 from models.user import User
 
+
 class FileStorage(unittest.TestCase):
     """Class to test File Storage"""
     storage = FileStorage()
@@ -26,7 +27,8 @@ class FileStorage(unittest.TestCase):
         """testing new method"""
         new_instance = BaseModel()
         self.storage.new(new_instance)
-        self.assertTrue(self.storage.all()[f'BaseModel.{new_instance.id}'] is new_instance)
+        key = f'BaseModel.{new_instance.id}'
+        self.assertTrue(self.storage.all()[key] is new_instance)
 
     def test_save(self):
         """testing save method"""
@@ -39,25 +41,27 @@ class FileStorage(unittest.TestCase):
     def test_reload(self):
         """testing reload method"""
         new = BaseModel()
-        aux ={}
+        aux = {}
+        key = f'BaseModel.{new.id}'
         aux.update({f'BaseModel.{new.id}': new.to_dict()})
         with open("file.json", "w") as fd:
             fd.write(json.dumps(aux))
         self.storage.reload()
         self.assertTrue(f'BaseModel.{new.id}' in self.storage.all().keys())
-        self.assertEqual(self.storage.all()[f'BaseModel.{new.id}'].__str__(), new.__str__())
+        self.assertEqual(self.storage.all()[key].__str__(), new.__str__())
 
     def test_reload2(self):
         """testing reload method"""
         new_fake = BaseModel()
         new = BaseModel(**new_fake.to_dict())
-        aux ={}
+        aux = {}
+        key = f'BaseModel.{new.id}'
         aux.update({f'BaseModel.{new.id}': new.to_dict()})
         with open("file.json", "w") as fd:
             fd.write(json.dumps(aux))
         self.storage.reload()
         self.assertTrue(f'BaseModel.{new.id}' in self.storage.all().keys())
-        self.assertEqual(self.storage.all()[f'BaseModel.{new.id}'].__str__(), new.__str__())
+        self.assertEqual(self.storage.all()[key].__str__(), new.__str__())
 
 
 if __name__ == '__main__':
