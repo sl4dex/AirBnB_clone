@@ -15,14 +15,11 @@ class FileStorage(unittest.TestCase):
     def test_all(self):
         """test save method"""
         self.assertEqual(type(self.storage.all()), dict)
-        self.assertTrue()
 
     def test_new(self):
         new_instance = BaseModel()
         self.storage.new(new_instance)
         self.assertTrue(new_instance in self.storage.all().values())
-        for key in self.storage.all().values():
-            self.assertTrue(type(self.storage.all()[key]), )
 
     def test_save(self):
         with open("file.json", "w") as fd:
