@@ -7,9 +7,11 @@ from models.user import User
 from datetime import datetime
 from models.engine.file_storage import FileStorage
 
+
 class TestUser(unittest.TestCase):
     """Class to test User"""
     storage = FileStorage()
+
     def test_types(self):
         """test attribute types and class type"""
         model1 = User()

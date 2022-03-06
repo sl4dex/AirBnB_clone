@@ -59,5 +59,6 @@ class TestBaseModel(unittest.TestCase):
             obj = json.load(fd)[f"BaseModel.{model1.id}"]
             self.assertEqual(model1.to_dict(), BaseModel(**obj).to_dict())
 
+
 if __name__ == '__main__':
     unittest.main()
