@@ -25,6 +25,10 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(dct['__class__'], 'BaseModel')
         self.assertEqual(dct['created_at'], model1.created_at.isoformat())
         self.assertEqual(dct['updated_at'], model1.updated_at.isoformat())
+        storage.reload()
+        self.assertEqual(dct['__class__'], 'BaseModel')
+        self.assertEqual(dct['created_at'], model1.created_at.isoformat())
+        self.assertEqual(dct['updated_at'], model1.updated_at.isoformat())
 
     def test_types(self):
         """test attribute types and class type"""
