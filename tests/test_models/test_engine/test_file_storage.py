@@ -23,11 +23,13 @@ class FileStorage(unittest.TestCase):
             self.assertTrue(type(key) is str)
 
     def test_new(self):
+        """testing new method"""
         new_instance = BaseModel()
         self.storage.new(new_instance)
         self.assertTrue(self.storage.all()[f'BaseModel.{new_instance.id}'] is new_instance)
 
     def test_save(self):
+        """testing save method"""
         with open("file.json", "w") as fd:
             fd.write("{}")
         self.storage.save()
@@ -35,6 +37,7 @@ class FileStorage(unittest.TestCase):
             self.assertTrue(fd.read() != "{}")
 
     def test_reload(self):
+        """testing reload method"""
         new = BaseModel()
         aux ={}
         aux.update({f'BaseModel.{new.id}': new.to_dict()})
@@ -45,6 +48,7 @@ class FileStorage(unittest.TestCase):
         self.assertEqual(self.storage.all()[f'BaseModel.{new.id}'].__str__(), new.__str__())
 
     def test_reload2(self):
+        """testing reload method"""
         new_fake = BaseModel()
         new = BaseModel(**new_fake.to_dict())
         aux ={}
@@ -54,14 +58,6 @@ class FileStorage(unittest.TestCase):
         self.storage.reload()
         self.assertTrue(f'BaseModel.{new.id}' in self.storage.all().keys())
         self.assertEqual(self.storage.all()[f'BaseModel.{new.id}'].__str__(), new.__str__())
-
-    def test_kwargs(self):
-        """test creating a BaseModel instance form a str dict"""
-        model1 = BaseModel()
-        model2 = BaseModel(**model1.to_dict())
-        self.storage.new(model2)
-        self.assertFalse(model1 is model2)
-        self.assertTrue(model2 in self.storage.all().values())
 
 
 if __name__ == '__main__':
