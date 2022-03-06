@@ -25,6 +25,14 @@ class TestConsole(unittest.TestCase):
 
     def test_create(self):
         self.assertEqual(self.cmd("create"), "** class name missing **")
+        self.assertTrue(f'BaseModel.{self.cmd("create BaseModel")}' in self.storage.all().keys())
+        self.assertTrue(f'Amenity.{self.cmd("create Amenity")}' in self.storage.all().keys())
+        self.assertTrue(f'City.{self.cmd("create City")}' in self.storage.all().keys())
+        self.assertTrue(f'Place.{self.cmd("create Place")}' in self.storage.all().keys())
+        self.assertTrue(f'Review.{self.cmd("create Review")}' in self.storage.all().keys())
+        self.assertTrue(f'State.{self.cmd("create State")}' in self.storage.all().keys())
+        self.assertTrue(f'User.{self.cmd("create User")}' in self.storage.all().keys())
+
 
     def test_all(self):
         self.assertEqual(self.cmd("all MyModel"), "** class doesn't exist **")
