@@ -11,6 +11,7 @@ from models import FileStorage
 import sys
 from console import HBNBCommand
 
+
 class TestConsole(unittest.TestCase):
     """testing Console"""
 
