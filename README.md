@@ -5,15 +5,53 @@ The idea of the project is to make a very similar program to that of [AirBnB](ht
 What is AirBnB? It's an online marketplace for house, hotel, and hostel rentals. It does not own any  
 of the listed properties, instead it just displays all available properties listed by vendors for guests to rent. 
 <br /><br />
-We achieve these functionalities with our custom command interpreter, using the cmd python library  
-### Project Installation
+We achieve these functionalities with our custom command interpreter using the [cmd python library](https://docs.python.org/3/library/cmd.html)  
+## Project Installation
 `git clone https://github.com/sl4dex/AirBnB_clone`
-<br /><br /><br />
+### Project tree
+```
+AirBnB_clone
+|
+|-- models
+|   |
+|   |-- engine
+|   |   |
+|   |   |-- file_storage.py
+|   |   `-- __init__.py
+|   |
+|   |-- amenity.py
+|   |-- base_model.py
+|   |-- city.py
+|   |-- __init__.py
+|   |-- place.py
+|   |-- review.py
+|   |-- state.py
+|   `-- user.py
+|
+|-- tests
+|   |
+|   |-- __init__.py
+|   `-- test_models
+|       |
+|       |-- __init__.py
+|       |-- test_amenity.py
+|       |-- test_base_model.py
+|       |-- test_city.py
+|       |-- test_place.py
+|       |-- test_review.py
+|       |-- test_state.py
+|       `-- test_user.py
+|
+|-- AUTHORS
+|-- console.py
+|-- file.json
+`-- README.md
+```
 ## HBNB command interpreter
 To start the hbnb console just execute the console.py file  
 `./console.py` 
 ### Usage
-You can check all available commands by tiping `help`  
+You can check all available commands by typing `help`  
 ```
 (hbnb) help
 
@@ -26,20 +64,36 @@ EOF  all  count  create  destroy  help  quit  show  update
 and exit the terminal by typing `quit`
 
 ### create: object creation
+#### Syntax
+create classname  
+classname.create()  
+#### Description
 Creates a new instance of a class, saves it to the JSON file, and prints the id
+#### Example
 ```
 (hbnb) create BaseModel
 660d0e7c-5834-4c40-a5e3-29feadc1fcbd
 (hbnb) 
 ```
 ### destroy: object deletion
+#### Syntax
+destory classname id 
+classname.destroy(id)  
+#### Description
 Deletes object with specified id, saves the changes to JSON file 
+#### Example
 ```
 (hbnb) destroy BaseModel 660d0e7c-5834-4c40-a5e3-29feadc1fcbd
 (hbnb) 
 ```
 ### all, show: object listing
-**all** prints all string representation of all instances based or not on the class name  
+#### Syntax
+all  
+all classname  
+classname.all()  
+#### Description
+prints all string representation of all instances based or not on the class name   
+#### Example
 ```
 (hbnb) all
 [
@@ -70,8 +124,12 @@ Deletes object with specified id, saves the changes to JSON file
   }>"
 ]  
 ```
-<br /><br />
-**show** prints the string representation of an instance with the specified id
+#### Syntax  
+show classname id  
+classname.show(id)  
+#### Description
+prints the string representation of an instance with the specified id  
+#### Example
 ```
 (hbnb) show City 62eb94be-4fbc-4236-a87f-b6899a34648e
 [
@@ -86,7 +144,11 @@ Deletes object with specified id, saves the changes to JSON file
 (hbnb) 
 ```
 ### count: object counting
-Retrieve the number of instances of a class: _\<class name\>.count()_
+#### Syntax  
+classname.count()  
+#### Description
+Retrieve the number of instances of a class
+#### Example
 ```
 (hbnb) BaseModel.count()
 2
@@ -95,9 +157,16 @@ Retrieve the number of instances of a class: _\<class name\>.count()_
 (hbnb) 
 ```
 ### update: object modification
-Updates an instance with the specified id. You can update:
+#### Syntax  
+update classname id attrname attrvalue  
+classname.update(id, attrname, attrvalue)  
+update classname id {'attrname': "attrvalue" ...}  
+classname.update(id, {'attrname': "attrvalue" ...})  
+#### Description
+Updates attribute/s of an instance with the specified id. You can update:  
 - a single value specifying an attribute name and the new value
 - a single or multiple values with a dictionary of attribute names and values as items
+#### Example
 ```
 (hbnb) show City 62eb94be-4fbc-4236-a87f-b6899a34648e
 [
