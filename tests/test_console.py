@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Unittest for FileStorage class
+Unittest for Console class
 """
 from io import StringIO
 import unittest
@@ -18,11 +18,13 @@ class TestConsole(unittest.TestCase):
     model1 = BaseModel()
 
     def cmd(self, *args):
+        """catchs output of cmd"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd(args[0])
         return f.getvalue().strip("\n")
 
     def test_all(self):
+        """Testing all command"""
         self.assertEqual(self.cmd("all MyModel"), "** class doesn't exist **")
 
 if __name__ == '__main__':
