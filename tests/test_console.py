@@ -27,5 +27,6 @@ class TestConsole(unittest.TestCase):
         """Testing all command"""
         self.assertEqual(self.cmd("all MyModel"), "** class doesn't exist **")
 
+
 if __name__ == '__main__':
     unittest.main()
