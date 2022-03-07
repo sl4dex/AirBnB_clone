@@ -47,6 +47,54 @@ AirBnB_clone
 |-- file.json
 `-- README.md
 ```
+### Class hierarchy (only subclasses and attributes)
+```
+BaseModel
+|
+|-- User(BaseModel)
+|   |
+|   |-- email
+|   |-- password
+|   |-- first_name
+|   `-- last_name
+|
+|-- State(BaseModel)
+|   |
+|   |-- state_id
+|   `-- name
+|
+|-- City(BaseModel)
+|   |
+|   `-- name
+|
+|-- Amenity(BaseModel)
+|   |
+|   `-- name
+|
+|-- Place(BaseModel)
+|   |
+|   |-- city_id
+|   |-- user_id
+|   |-- name
+|   |-- description
+|   |-- number_rooms
+|   |-- number_bathrooms
+|   |-- masx_guest
+|   |-- price_by_night
+|   |-- latitude
+|   |-- longitude
+|   `-- amenity_ids
+|
+|-- Review(BaseModel)
+|   |
+|   |-- place_id
+|   |-- user_id
+|   `-- text
+|
+|-- id
+|-- created_at
+`-- updated_at
+```
 ## HBNB command interpreter
 To start the hbnb console just execute the console.py file  
 `./console.py` 
@@ -203,3 +251,5 @@ Updates attribute/s of an instance with the specified id. You can update:
   }>"
 ]
 ```
+<br /><br /><br /><br />
+_Developed by Ignacio Castellan & Salvador Diaz_
