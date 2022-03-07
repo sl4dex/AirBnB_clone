@@ -30,17 +30,24 @@ AirBnB_clone
 |
 |-- tests
 |   |
+|   |-- test_models
+|   |   |
+|   |   |-- test_engine
+|   |   |   |
+|   |   |   |-- __init__.py
+|   |   |   `-- test_file_storage.py
+|   |   |
+|   |   |-- __init__.py
+|   |   |-- test_amenity.py
+|   |   |-- test_base_model.py
+|   |   |-- test_city.py
+|   |   |-- test_place.py
+|   |   |-- test_review.py
+|   |   |-- test_state.py
+|   |   `-- test_user.py
+|   |
 |   |-- __init__.py
-|   `-- test_models
-|       |
-|       |-- __init__.py
-|       |-- test_amenity.py
-|       |-- test_base_model.py
-|       |-- test_city.py
-|       |-- test_place.py
-|       |-- test_review.py
-|       |-- test_state.py
-|       `-- test_user.py
+|   `-- test_console.py
 |
 |-- AUTHORS
 |-- console.py
@@ -109,7 +116,7 @@ EOF  all  count  create  destroy  help  quit  show  update
 
 (hbnb) 
 ```
-and exit the terminal by typing `quit`
+and exit the console by typing `quit`
 
 ### create: object creation
 #### Syntax
